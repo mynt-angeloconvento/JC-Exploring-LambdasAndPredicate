@@ -20,7 +20,13 @@ public class LambdaLab {
         callSigns.add("Echo");
         callSigns.add("Avenger");
         Predicate<String> startsWithA = s -> s.startsWith("A");
-        filterAndPrint(callSigns, startsWithA, "Call signs starting with 'A'");
+        // filterAndPrint(callSigns, startsWithA, "Call signs starting with 'A'");
+        
+        Predicate<String> hasLengthGreaterThan5 = s -> s.length() > 5;
+        Predicate<String> complexCondition = startsWithA.and(hasLengthGreaterThan5);
+        filterAndPrint(callSigns, complexCondition, "Starts with 'A' AND length > 5");
+        Predicate<String> doesNotStartWithA = startsWithA.negate();
+        filterAndPrint(callSigns, doesNotStartWithA, "Does NOT start with 'A'");
     }
 
     public static void filterAndPrint(List<String> list, Predicate<String> predicate, String description) {
